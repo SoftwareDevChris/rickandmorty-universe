@@ -1,0 +1,45 @@
+.figure {
+  color: #fff;
+  background: #252525f5;
+  border-radius: 0.2rem;
+  position: relative;
+  width: 90%;
+
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.image_container {
+  margin: 0;
+  padding: 0;
+}
+
+.image_container img {
+  border-radius: 0.1rem;
+}
+
+.figure_caption {
+  position: relative;
+  padding: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
+.figure_caption .figure_title {
+  /* position: absolute;
+  top: 1rem;
+  text-align: left; */
+}
+
+.figure_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.cardButton_container {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem 0;
+}

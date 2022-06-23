@@ -1,0 +1,32 @@
+.header {
+  width: 100%;
+  height: 60px;
+  background: #000000;
+  background: linear-gradient(180deg, #010101 10%, #01010100 90%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 100;
+}
+
+.header ul {
+  height: max-content;
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: capitalize;
+  color: #ffff;
+}
+
+.header ul li {
+  margin: 0.5rem;
+}
+
+.header ul li a {
+  padding: 0.5rem;
+}
