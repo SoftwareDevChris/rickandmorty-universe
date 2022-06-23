@@ -2,11 +2,12 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 
-import { QueryClient, dehydrate, useQuery, useQueries } from "react-query";
+import {} from "react-query";
 
 import styles from "../styles/Home.module.css";
 
 import PageLayout from "../components/PageLayout";
+import fetchCharacters from "./api/fetchCharacters";
 
 const Home: NextPage = () => {
   return (
@@ -31,6 +32,7 @@ const Home: NextPage = () => {
 
           <div className={styles.hero_image_container}>
             <Image
+              loading="eager"
               alt="Rick And Morty between rift portals"
               width={350}
               height={350}
@@ -45,30 +47,7 @@ const Home: NextPage = () => {
 
 export default Home;
 
-export async function getStaticProps() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: Infinity,
-        cacheTime: Infinity,
-        keepPreviousData: true,
-        refetchOnWindowFocus: false,
-        refetchOnReconnect: false,
-      },
-    },
-  });
-
-  let charactersURL: string = `https://rickandmortyapi.com/api/character`;
-
-  const getCharacters = async () => {
-    return fetch(charactersURL).then((res) => res.json());
-  };
-
-  await queryClient.fetchQuery("characters", getCharacters);
-
-  return {
-    props: {
-      dehydratedState: dehydrate(queryClient),
-    },
-  };
-}
+// export async function getStaticProps() {
+//   const prefetchedCharacters = await fetchCharacters;
+//   return { props: { prefetchedCharacters } };
+// }

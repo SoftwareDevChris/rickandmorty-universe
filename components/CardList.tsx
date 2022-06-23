@@ -1,5 +1,7 @@
 import ReactPaginate from "react-paginate";
 
+import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
+
 import styles from "../styles/CardList.module.css";
 
 type CardListProps = {
@@ -28,13 +30,15 @@ const CardList = ({ info, setPage, currentPage, children }: CardListProps) => {
       <div className={styles.pagination_container}>
         <ReactPaginate
           containerClassName={styles.pagination_component}
-          nextLabel="->"
-          previousLabel="<-"
+          nextLabel={<AiOutlineArrowRight size={20} />}
+          previousLabel={<AiOutlineArrowLeft size={20} />}
           forcePage={currentPage - 1}
           pageCount={maxNumberOfPages}
           onPageChange={(number) => selectPage(number)}
           pageRangeDisplayed={2}
           renderOnZeroPageCount={undefined}
+          nextClassName={styles.pagination_next}
+          previousClassName={styles.pagination_prev}
         />
       </div>
     </>

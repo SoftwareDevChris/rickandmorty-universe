@@ -15,3 +15,23 @@
   color: white;
   display: flex;
 }
+
+.pagination_component {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  padding: 1rem 0;
+  font-weight: 600;
+}
+
+.pagination_component li {
+  margin: 0.2rem;
+  padding: 0.2rem 0.6rem;
+  cursor: pointer;
+}
+
+.pagination_next a,
+.pagination_prev a {
+  display: flex;
+  align-items: flex-end;
+}
