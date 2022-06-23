@@ -15,33 +15,3 @@
   color: white;
   display: flex;
 }
-
-.selectPage_button {
-  text-align: center;
-  margin: 2rem 0;
-  height: 3.5rem;
-  width: 7rem;
-  cursor: pointer;
-
-  background: #0638da;
-  border-radius: 0.5rem;
-
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.pagination_component {
-  color: white;
-  display: flex;
-  list-style-type: none;
-  padding: 1rem;
-}
-
-.pagination_component li {
-  padding: 0.3rem 0.6rem;
-  margin: 0 0.4rem;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-}
