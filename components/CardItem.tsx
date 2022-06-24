@@ -6,13 +6,7 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardActions from "@mui/material/CardActions";
 
-interface DataModel {
-  id: number;
-  name: string;
-  species: string;
-  status: string;
-  image: string;
-}
+import DataModel from "../utility/DataModel";
 
 type CardProps = {
   data: [];
@@ -29,16 +23,15 @@ const CardItem = ({ data, dataType }: CardProps) => {
             variant="outlined"
             sx={{ width: "100%", background: "#1a1a1acf", color: "#ffff" }}
           >
-            <CardActionArea>
+            <CardActionArea href={`characters/${char.id}`}>
               {dataType === "characters" && (
                 <CardMedia
                   component="img"
-                  height={200}
+                  height={250}
                   image={char.image}
                   alt={`An image of ${char.name}`}
                 />
               )}
-
               <CardContent>
                 <Typography
                   variant="h5"
@@ -51,6 +44,9 @@ const CardItem = ({ data, dataType }: CardProps) => {
                 <Typography variant="body2" color="#ffff">
                   {char.species}
                 </Typography>
+                {/* <CardActions>
+                  <Button>Read more</Button>
+                </CardActions> */}
               </CardContent>
             </CardActionArea>
           </Card>

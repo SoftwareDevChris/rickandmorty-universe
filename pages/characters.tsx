@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useQuery } from "react-query";
 
@@ -11,7 +11,13 @@ import CardList from "../components/CardList";
 import CardItem from "../components/CardItem";
 
 const Characters: NextPage = () => {
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [pageNumber, setPageNumber] = useState<string | null>();
+
+  useEffect(() => {
+    const initialPageNumber = sessionStorage.getItem("selectedPage");
+    if (initialPageNumber) setPageNumber(initialPageNumber);
+    if (!initialPageNumber) setPageNumber("1");
+  }, [pageNumber]);
 
   const { data, isLoading, isFetching } = useQuery(
     [`characters`, pageNumber],
@@ -19,10 +25,12 @@ const Characters: NextPage = () => {
     queryOptions
   );
 
-  if (isLoading || !data) return <div>No data!</div>;
-  if (isFetching) return <div>Loading...</div>;
+  if (isLoading) return <div>Loading data...</div>;
+  if (isFetching) return <div>Fetching data...</div>;
+  if (!data) return <div>No data could be found</div>;
 
-  const setPage = (page: number) => {
+  const setPage = (page: string) => {
+    sessionStorage.setItem("selectedPage", page);
     setPageNumber(page);
   };
 

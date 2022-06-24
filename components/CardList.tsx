@@ -10,7 +10,7 @@ type CardListProps = {
     count: number;
   };
   setPage: Function;
-  currentPage: number;
+  currentPage?: string | null;
   children: JSX.Element;
 };
 
@@ -18,7 +18,7 @@ const CardList = ({ info, setPage, currentPage, children }: CardListProps) => {
   const maxNumberOfPages = info.pages;
 
   const selectPage = (selectPage: { selected: number }) => {
-    console.log(selectPage.selected + 1);
+    // console.log(selectPage.selected + 1);
     setPage(selectPage.selected + 1);
   };
 
@@ -32,7 +32,7 @@ const CardList = ({ info, setPage, currentPage, children }: CardListProps) => {
           containerClassName={styles.pagination_component}
           nextLabel={<AiOutlineArrowRight size={20} />}
           previousLabel={<AiOutlineArrowLeft size={20} />}
-          forcePage={currentPage - 1}
+          forcePage={currentPage ? parseInt(currentPage) - 1 : 1}
           pageCount={maxNumberOfPages}
           onPageChange={(number) => selectPage(number)}
           pageRangeDisplayed={2}

@@ -1,9 +1,11 @@
+import { FunctionComponent } from "react";
 import Link from "next/link";
+
 import styles from "../styles/Header.module.css";
 
-const NavItems: string[] = ["characters", "locations", "episodes"];
+const NavItems: string[] = ["characters"];
 
-const Header = () => {
+const Header: FunctionComponent = () => {
   return (
     <header className={styles.header}>
       <ul>

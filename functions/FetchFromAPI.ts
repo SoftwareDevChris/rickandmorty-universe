@@ -1,7 +1,10 @@
 // Fetch characters
-const fetchCharacters = async (page: number) => {
+const fetchCharacters = async (page?: any) => {
   let charactersURL: string = `https://rickandmortyapi.com/api/character`;
-  return await fetch(charactersURL + `?page=${page}`).then((e) => e.json());
+  const data = await fetch(charactersURL + `?page=${page}`).then((e) =>
+    e.json()
+  );
+  return await data;
 };
 
 export { fetchCharacters };

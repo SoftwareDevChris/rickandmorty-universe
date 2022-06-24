@@ -1,8 +1,7 @@
+import { useEffect } from "react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-
-import {} from "react-query";
 
 import styles from "../styles/Home.module.css";
 
@@ -10,6 +9,11 @@ import PageLayout from "../components/PageLayout";
 import fetchCharacters from "./api/fetchCharacters";
 
 const Home: NextPage = () => {
+  useEffect(() => {
+    const currentPage = sessionStorage.getItem("selectedPage");
+    if (currentPage) sessionStorage.setItem("selectedPage", "1");
+  });
+
   return (
     <>
       <Head>
