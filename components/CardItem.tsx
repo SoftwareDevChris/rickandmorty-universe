@@ -20,7 +20,6 @@ const CardItem = ({ data, dataType }: CardProps) => {
         return (
           <Card
             key={char.id}
-            variant="outlined"
             sx={{ width: "100%", background: "#1a1a1acf", color: "#ffff" }}
           >
             <CardActionArea href={`characters/${char.id}`}>
@@ -44,11 +43,11 @@ const CardItem = ({ data, dataType }: CardProps) => {
                 <Typography variant="body2" color="#ffff">
                   {char.species}
                 </Typography>
-                {/* <CardActions>
-                  <Button>Read more</Button>
-                </CardActions> */}
               </CardContent>
             </CardActionArea>
+            <CardActions>
+              <Button href={`characters/${char.id}`}>Read more</Button>
+            </CardActions>
           </Card>
         );
       })}

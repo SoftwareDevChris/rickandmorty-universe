@@ -18,7 +18,7 @@ a {
 .pageLayout {
   min-height: 100vh;
   min-width: 100%;
-  padding: 60px 0;
+  padding: 5rem 0;
   background: url("../public/sky.jpg");
   background-position: center;
   background-repeat: no-repeat;

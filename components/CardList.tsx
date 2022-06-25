@@ -15,8 +15,11 @@ type CardListProps = {
 };
 
 const CardList = ({ info, setPage, currentPage, children }: CardListProps) => {
+  // Max number of pages from the API
   const maxNumberOfPages = info.pages;
 
+  // Handler function for whenever the user selects a new page.
+  // Calls the "setPage" prop back to the characters page.
   const selectPage = (selectPage: { selected: number }) => {
     // console.log(selectPage.selected + 1);
     setPage(selectPage.selected + 1);

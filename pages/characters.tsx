@@ -13,22 +13,28 @@ import CardItem from "../components/CardItem";
 const Characters: NextPage = () => {
   const [pageNumber, setPageNumber] = useState<string | null>();
 
+  // Set the initial pagenumber to whatever is in the sessionstorage.
+  // If nothing is there, pageNumber will be set to 1.
+  // However if there is a value in the sessionstorage, pass it to pageNumber stage
   useEffect(() => {
     const initialPageNumber = sessionStorage.getItem("selectedPage");
     if (initialPageNumber) setPageNumber(initialPageNumber);
     if (!initialPageNumber) setPageNumber("1");
   }, [pageNumber]);
 
+  // Fetching data with custom query options from the 'utility' folder
   const { data, isLoading, isFetching } = useQuery(
     [`characters`, pageNumber],
     () => fetchCharacters(pageNumber),
     queryOptions
   );
 
+  // If the data is loading or missing
   if (isLoading) return <div>Loading data...</div>;
   if (isFetching) return <div>Fetching data...</div>;
   if (!data) return <div>No data could be found</div>;
 
+  // Function to handle pageswitch and sessionstorage of the currently selected page.
   const setPage = (page: string) => {
     sessionStorage.setItem("selectedPage", page);
     setPageNumber(page);

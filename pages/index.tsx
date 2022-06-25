@@ -6,9 +6,9 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 
 import PageLayout from "../components/PageLayout";
-import fetchCharacters from "./api/fetchCharacters";
 
 const Home: NextPage = () => {
+  // Set the selected page back to 1 in the character pagination
   useEffect(() => {
     const currentPage = sessionStorage.getItem("selectedPage");
     if (currentPage) sessionStorage.setItem("selectedPage", "1");
@@ -20,7 +20,7 @@ const Home: NextPage = () => {
         <title>{`Rick & Morty - Home`}</title>
         <meta
           name="description"
-          content="An overview of the characters in the Rick And Morty show"
+          content="An overview of all characters in the Rick And Morty show"
         />
         <link rel="icon" href="/rickmorty.jpg" />
       </Head>
@@ -50,8 +50,3 @@ const Home: NextPage = () => {
 };
 
 export default Home;
-
-// export async function getStaticProps() {
-//   const prefetchedCharacters = await fetchCharacters;
-//   return { props: { prefetchedCharacters } };
-// }

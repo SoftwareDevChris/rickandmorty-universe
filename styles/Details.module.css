@@ -1,0 +1,8 @@
+.details_container {
+  padding: 0 1rem;
+}
+
+.details_contentRow {
+  display: flex;
+  justify-content: space-between;
+}
