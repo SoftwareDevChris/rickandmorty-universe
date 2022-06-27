@@ -18,7 +18,7 @@ a {
 .pageLayout {
   min-height: 100vh;
   min-width: 100%;
-  padding: 5rem 0;
+  padding: 5rem 1rem;
   background: url("../public/sky.jpg");
   background-position: center;
   background-repeat: no-repeat;
@@ -27,6 +27,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .selected {

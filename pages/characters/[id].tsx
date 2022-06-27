@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Head from "next/head";
 
 import {
   Button,
@@ -11,7 +11,7 @@ import {
 
 import PageLayout from "../../components/PageLayout";
 import styles from "../../styles/Details.module.css";
-import { url } from "inspector";
+import { useEffect, useState } from "react";
 
 // Base API URL
 let charactersURL: string = `https://rickandmortyapi.com/api/character`;
@@ -85,9 +85,27 @@ type Character = {
   };
 };
 
+type LocationInfo = {
+  dimension: string;
+  name: string;
+  type: string;
+  residents: [];
+};
+
 // Component for rendering a single item with all its details
 const Details = (char: Character) => {
-  console.log(char.characters);
+  const [locationInfo, setLocationInfo] = useState<LocationInfo>();
+
+  useEffect(() => {
+    const getLocationData = async () => {
+      const getData = await fetch(char.characters.location.url);
+      const res = await getData.json();
+      setLocationInfo(res);
+    };
+    getLocationData();
+  }, [char.characters.location.url]);
+
+  console.log(locationInfo);
 
   const setDynamicTextColor = (status?: string) => {
     if (status === "Dead") return "#d70101";
@@ -96,106 +114,155 @@ const Details = (char: Character) => {
     return "#e6e6e6";
   };
 
-  // const returnFromAPI = async (URL: string) => {
-  //   const getData = await fetch(URL);
-  //   const data = getData.json();
-
-  //   console.log(data);
-  //   return data;
-  // };
-
   return (
-    <PageLayout>
-      <div className={styles.details_container}>
-        <Card sx={{ background: "#1a1a1acf", color: "#ffff" }}>
-          {/* Image */}
-          <CardMedia
-            component="img"
-            src={char.characters.image}
-            alt={`An image of ${char.characters.name}`}
-            // width={300}
-            // height={300}
-          />
-          <CardContent>
-            {/* Character name */}
-            <Typography variant="h4" component="h5" gutterBottom>
-              {char.characters.name}
-            </Typography>
-            {/* Section header */}
-            {/* INFO - INFO - INFO */}
-            <Typography
-              variant="h6"
-              color={`${setDynamicTextColor()}`}
-              sx={{ marginTop: 2, textDecoration: "underline" }}
-            >
-              Info
-            </Typography>
-            {/* Content row */}
-            {/* Gender */}
-            <div className={styles.details_contentRow}>
-              <Typography variant="body2" color={`${setDynamicTextColor()}`}>
-                Gender:
+    <>
+      <Head>
+        <title>{`Rick & Morty - ${char.characters.name}`}</title>
+        <meta
+          name="description"
+          content={`A detailed description of ${char.characters.name}`}
+        />
+        <link rel="icon" href="/rickmorty.jpg" />
+      </Head>
+
+      <PageLayout>
+        <div className={styles.details_container}>
+          <Card sx={{ background: "#1a1a1acf", color: "#ffff" }}>
+            {/* Image */}
+            <CardMedia
+              component="img"
+              src={char.characters.image}
+              alt={`An image of ${char.characters.name}`}
+              // width={300}
+              // height={300}
+            />
+            <CardContent>
+              {/* Character name */}
+              <Typography variant="h4" component="h5" gutterBottom>
+                {char.characters.name}
               </Typography>
-              <Typography variant="body2" color={`${setDynamicTextColor()}`}>
-                {char.characters.gender}
-              </Typography>
-            </div>
-            {/* Content row */}
-            {/* Status */}
-            <div className={styles.details_contentRow}>
-              <Typography variant="body2" color={`${setDynamicTextColor()}`}>
-                Status:
-              </Typography>
+              {/* Section header */}
+              {/* INFO - INFO - INFO */}
               <Typography
-                variant="body2"
-                color={`${setDynamicTextColor(char.characters.status)}`}
+                variant="h6"
+                color={`${setDynamicTextColor()}`}
+                sx={{ marginTop: 2, textDecoration: "underline" }}
               >
-                {char.characters.status}
+                Information
               </Typography>
-            </div>
-            {/* Content row */}
-            {/* Species */}
-            <div className={styles.details_contentRow}>
-              <Typography variant="body2" color={`${setDynamicTextColor()}`}>
-                Species:
+              {/* Content row */}
+              {/* Gender */}
+              <div className={styles.details_contentRow}>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  Gender:
+                </Typography>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  {char.characters.gender}
+                </Typography>
+              </div>
+              {/* Content row */}
+              {/* Status */}
+              <div className={styles.details_contentRow}>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  Status:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  color={`${setDynamicTextColor(char.characters.status)}`}
+                >
+                  {char.characters.status}
+                </Typography>
+              </div>
+              {/* Content row */}
+              {/* Species */}
+              <div className={styles.details_contentRow}>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  Species:
+                </Typography>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  {char.characters.species}
+                </Typography>
+              </div>
+              {/* Content row */}
+              {/* Type */}
+              <div className={styles.details_contentRow}>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  Type:
+                </Typography>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  {char.characters.type || "N/A"}
+                </Typography>
+              </div>
+              {/* Section header */}
+              {/* LOCATION - LOCATION - LOCATION */}
+              <Typography
+                variant="h6"
+                color={`${setDynamicTextColor()}`}
+                sx={{ marginTop: 2, textDecoration: "underline" }}
+              >
+                Location
               </Typography>
-              <Typography variant="body2" color={`${setDynamicTextColor()}`}>
-                {char.characters.species}
-              </Typography>
-            </div>
-            {/* Content row */}
-            {/* Type */}
-            <div className={styles.details_contentRow}>
-              <Typography variant="body2" color={`${setDynamicTextColor()}`}>
-                Type:
-              </Typography>
-              <Typography variant="body2" color={`${setDynamicTextColor()}`}>
-                {char.characters.type}
-              </Typography>
-            </div>
-            {/* Section header */}
-            {/* LOCATION - LOCATION - LOCATION */}
-            <Typography
-              variant="h6"
-              color={`${setDynamicTextColor()}`}
-              sx={{ marginTop: 2, textDecoration: "underline" }}
-            >
-              Location
-            </Typography>
-            {/* Content row */}
-            {/* Name */}
-            <div className={styles.details_contentRow}>
-              <Typography variant="body2" color={`${setDynamicTextColor()}`}>
-                Name:
-              </Typography>
-              <Typography variant="body2" color={`${setDynamicTextColor()}`}>
-                {char.characters.location.name}
-              </Typography>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-    </PageLayout>
+              {/* Content row */}
+              {/* Name */}
+              <div className={styles.details_contentRow}>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  Name:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  noWrap={false}
+                  color={`${setDynamicTextColor()}`}
+                >
+                  {locationInfo?.name}
+                </Typography>
+              </div>
+              {/* Content row */}
+              {/* Dimension */}
+              <div className={styles.details_contentRow}>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  Dimension:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  noWrap={false}
+                  color={`${setDynamicTextColor()}`}
+                >
+                  {locationInfo?.dimension || "N/A"}
+                </Typography>
+              </div>
+              {/* Content row */}
+              {/* Type */}
+              <div className={styles.details_contentRow}>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  Type:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  noWrap={false}
+                  color={`${setDynamicTextColor()}`}
+                >
+                  {locationInfo?.type || "N/A"}
+                </Typography>
+              </div>
+              {/* Content row */}
+              {/* Residents */}
+              <div className={styles.details_contentRow}>
+                <Typography variant="body2" color={`${setDynamicTextColor()}`}>
+                  Residents:
+                </Typography>
+                <Typography
+                  variant="body2"
+                  noWrap={false}
+                  color={`${setDynamicTextColor()}`}
+                >
+                  {locationInfo?.residents.length || "N/A"}
+                </Typography>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </PageLayout>
+    </>
   );
 };
 

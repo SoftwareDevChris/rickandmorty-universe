@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import { useEffect, useState } from "react";
 
 import { useQuery } from "react-query";
@@ -43,13 +44,28 @@ const Characters: NextPage = () => {
   // console.log(data);
 
   return (
-    <PageLayout>
-      <>
-        <CardList info={data?.info} setPage={setPage} currentPage={pageNumber}>
-          <CardItem data={data?.results} dataType={"characters"} />
-        </CardList>
-      </>
-    </PageLayout>
+    <>
+      <Head>
+        <title>{`Rick & Morty - Characters`}</title>
+        <meta
+          name="description"
+          content="An overview of all characters in the Rick And Morty show"
+        />
+        <link rel="icon" href="/rickmorty.jpg" />
+      </Head>
+
+      <PageLayout>
+        <>
+          <CardList
+            info={data?.info}
+            setPage={setPage}
+            currentPage={pageNumber}
+          >
+            <CardItem data={data?.results} dataType={"characters"} />
+          </CardList>
+        </>
+      </PageLayout>
+    </>
   );
 };
 
