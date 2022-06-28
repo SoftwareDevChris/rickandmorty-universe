@@ -105,8 +105,6 @@ const Details = (char: Character) => {
     getLocationData();
   }, [char.characters.location.url]);
 
-  console.log(locationInfo);
-
   const setDynamicTextColor = (status?: string) => {
     if (status === "Dead") return "#d70101";
     if (status === "Alive") return "#008000";

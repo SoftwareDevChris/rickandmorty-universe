@@ -9,10 +9,9 @@ import DataModel from "../utility/DataModel";
 
 type CardProps = {
   data: [];
-  dataType: string;
 };
 
-const CardItem = ({ data, dataType }: CardProps) => {
+const CardItem = ({ data }: CardProps) => {
   return (
     <>
       {data.map((char: DataModel) => {
@@ -21,14 +20,13 @@ const CardItem = ({ data, dataType }: CardProps) => {
             key={char.id}
             sx={{ width: "100%", background: "#1a1a1acf", color: "#ffff" }}
           >
-            {dataType === "characters" && (
-              <CardMedia
-                component="img"
-                height={250}
-                image={char.image}
-                alt={`An image of ${char.name}`}
-              />
-            )}
+            <CardMedia
+              component="img"
+              height={250}
+              image={char.image}
+              alt={`An image of ${char.name}`}
+            />
+
             <CardContent>
               <Typography
                 variant="h5"
@@ -54,12 +52,3 @@ const CardItem = ({ data, dataType }: CardProps) => {
 };
 
 export default CardItem;
-
-{
-  /* <figcaption className={styles.figure_caption}>
-  <h3 className={styles.figure_title}>{char.name}</h3>
-  <div className={styles.figure_info}>
-    <p>{char.species}</p>
-  </div>
-</figcaption>; */
-}

@@ -17,20 +17,19 @@ import {
 } from "@mui/material";
 
 import AdbIcon from "@mui/icons-material/Adb";
-import MenuIcon from "@mui/icons-material/Menu";
 
 const Header: FunctionComponent = () => {
-  const [navAnchor, setNavAnchor] = useState(null);
+  const [navAnchor, setNavAnchor] = useState<null | HTMLElement>(null);
 
-  const closeMenuHandler = (event: any) => {
+  const closeMenuHandler = (event: React.MouseEvent<HTMLElement>) => {
     setNavAnchor(null);
   };
 
-  const openMenuHandler = (event: any) => {
+  const openMenuHandler = (event: React.MouseEvent<HTMLElement>) => {
     setNavAnchor(event?.currentTarget);
   };
 
-  const pages = ["Characters", "About"];
+  const pages = ["characters", "about"];
 
   return (
     <AppBar position="fixed" sx={{ background: "#141414f2" }}>
@@ -47,7 +46,7 @@ const Header: FunctionComponent = () => {
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
             }}
@@ -64,7 +63,8 @@ const Header: FunctionComponent = () => {
               onClick={openMenuHandler}
               color="inherit"
             >
-              <MenuIcon />
+              {navAnchor ? <AiOutlineClose /> : <AiOutlineMenu />}
+              {/* <MenuIcon /> */}
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -86,7 +86,14 @@ const Header: FunctionComponent = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={closeMenuHandler}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography
+                    component="a"
+                    href={`/${page}`}
+                    textTransform="capitalize"
+                    textAlign="center"
+                  >
+                    {page}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -96,14 +103,14 @@ const Header: FunctionComponent = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
               fontFamily: "monospace",
               fontWeight: 700,
-              letterSpacing: ".3rem",
+              letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
             }}
@@ -118,7 +125,7 @@ const Header: FunctionComponent = () => {
                   onClick={closeMenuHandler}
                   sx={{ my: 2, color: "white", display: "block" }}
                 >
-                  {page}
+                  <a href={`/${page}`}>{page}</a>
                 </Button>
               );
             })}

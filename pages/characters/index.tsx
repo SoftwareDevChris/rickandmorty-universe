@@ -4,12 +4,13 @@ import { useEffect, useState } from "react";
 
 import { useQuery } from "react-query";
 
-import { fetchCharacters } from "../functions/FetchFromAPI";
-import queryOptions from "../utility/QueryOptions";
+import { fetchCharacters } from "../../functions/FetchFromAPI";
+import queryOptions from "../../utility/QueryOptions";
 
-import PageLayout from "../components/PageLayout";
-import CardList from "../components/CardList";
-import CardItem from "../components/CardItem";
+import PageLayout from "../../components/PageLayout";
+import CardList from "../../components/CardList";
+import CardItem from "../../components/CardItem";
+import { Box, CircularProgress } from "@mui/material";
 
 const Characters: NextPage = () => {
   const [pageNumber, setPageNumber] = useState<string | null>();
@@ -31,8 +32,12 @@ const Characters: NextPage = () => {
   );
 
   // If the data is loading or missing
-  if (isLoading) return <div>Loading data...</div>;
-  if (isFetching) return <div>Fetching data...</div>;
+  if (isLoading || isFetching)
+    return (
+      <Box sx={{ display: "flex" }}>
+        <CircularProgress />
+      </Box>
+    );
   if (!data) return <div>No data could be found</div>;
 
   // Function to handle pageswitch and sessionstorage of the currently selected page.
@@ -61,7 +66,7 @@ const Characters: NextPage = () => {
             setPage={setPage}
             currentPage={pageNumber}
           >
-            <CardItem data={data?.results} dataType={"characters"} />
+            <CardItem data={data?.results} />
           </CardList>
         </>
       </PageLayout>
