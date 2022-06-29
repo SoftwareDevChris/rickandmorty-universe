@@ -1,10 +1,18 @@
-// Fetch characters
-const fetchCharacters = async (page?: any) => {
-  let charactersURL: string = `https://rickandmortyapi.com/api/character`;
+let charactersURL: string = `https://rickandmortyapi.com/api/character`;
+
+// Fetch characters by page
+const fetchCharactersByPage = async (page?: string | null) => {
   const data = await fetch(charactersURL + `?page=${page}`).then((e) =>
     e.json()
   );
   return await data;
 };
 
-export { fetchCharacters };
+const fetchCharactersByName = async (name?: string | null) => {
+  const data = await fetch(charactersURL + `?name=${name}`).then((e) =>
+    e.json()
+  );
+  return await data;
+};
+
+export { fetchCharactersByPage, fetchCharactersByName };

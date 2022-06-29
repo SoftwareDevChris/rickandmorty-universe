@@ -5,16 +5,16 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 
-import DataModel from "../utility/DataModel";
+import { DataModel } from "../utility/DataModels";
 
 type CardProps = {
-  data: [];
+  data: [] | undefined;
 };
 
 const CardItem = ({ data }: CardProps) => {
   return (
     <>
-      {data.map((char: DataModel) => {
+      {data?.map((char: DataModel) => {
         return (
           <Card
             key={char.id}
@@ -23,6 +23,7 @@ const CardItem = ({ data }: CardProps) => {
             <CardMedia
               component="img"
               height={250}
+              width={250}
               image={char.image}
               alt={`An image of ${char.name}`}
             />
