@@ -1,12 +1,12 @@
 interface InitialApiResponse {
   info: {
-    count: number;
-    next: string | null;
+    count?: number;
+    next?: string | null;
     pages: number;
-    prev: string | null;
+    prev?: string | null;
   };
   results: [];
-  error: {
+  error?: {
     error: string;
   };
 }

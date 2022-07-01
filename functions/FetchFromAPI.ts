@@ -8,6 +8,7 @@ const fetchCharactersByPage = async (page?: string | null) => {
   return await data;
 };
 
+// Fetch characters by name
 const fetchCharactersByName = async (name?: string | null) => {
   const data = await fetch(charactersURL + `?name=${name}`).then((e) =>
     e.json()

@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 
 import {
   Button,
@@ -95,6 +96,7 @@ type LocationInfo = {
 // Component for rendering a single item with all its details
 const Details = (char: Character) => {
   const [locationInfo, setLocationInfo] = useState<LocationInfo>();
+  const router = useRouter();
 
   useEffect(() => {
     const getLocationData = async () => {
@@ -258,6 +260,7 @@ const Details = (char: Character) => {
               </div>
             </CardContent>
           </Card>
+          <Button onClick={() => router.back()}>Go back</Button>
         </div>
       </PageLayout>
     </>
