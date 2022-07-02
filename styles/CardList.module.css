@@ -13,6 +13,7 @@
 .pagination_container {
   color: white;
   display: flex;
+  justify-content: center;
 }
 
 .pagination_component {

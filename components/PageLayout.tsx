@@ -1,15 +1,19 @@
-import type { NextComponentType } from "next";
-
 import Header from "../components/Header";
 
 type PageProps = {
   children?: JSX.Element;
+  isCentered?: Boolean;
 };
 
-const PageLayout = ({ children }: PageProps) => (
+const PageLayout = ({ children, isCentered }: PageProps) => (
   <>
     <Header />
-    <div className="pageLayout">{children}</div>
+    <div
+      className="pageLayout"
+      style={isCentered && { justifyContent: "center", alignItems: "center" }}
+    >
+      {children}
+    </div>
   </>
 );
 

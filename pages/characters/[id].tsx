@@ -1,21 +1,22 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
+import { useEffect, useState } from "react";
+
 import {
   Button,
   Card,
   CardContent,
   CardMedia,
   Typography,
-  CardActionArea,
 } from "@mui/material";
 
-import PageLayout from "../../components/PageLayout";
 import styles from "../../styles/Details.module.css";
-import { useEffect, useState } from "react";
+
+import PageLayout from "../../components/PageLayout";
 
 // Base API URL
-let charactersURL: string = `https://rickandmortyapi.com/api/character`;
+let baseURL: string = `https://rickandmortyapi.com/api/character`;
 
 // Type equal to the initial response from the API
 type DataResponse = {
@@ -32,7 +33,7 @@ type Results = {
 // Setting static paths for every id in the first array fetched from the API
 // Passed as a params object with an id equal to every id from the API.
 export const getStaticPaths = async () => {
-  const res = await fetch(charactersURL);
+  const res = await fetch(baseURL);
   const data: DataResponse = await res.json();
   const results: [] = data.results;
 
@@ -56,7 +57,7 @@ export const getStaticPaths = async () => {
 // Lastly we're mapping that query to props
 export async function getStaticProps(context: any) {
   const id = context.params.id;
-  const res = await fetch(`${charactersURL}/${id}`);
+  const res = await fetch(`${baseURL}/${id}`);
   const data: Results = await res.json();
 
   return {

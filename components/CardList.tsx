@@ -21,7 +21,10 @@ const CardList: FunctionComponent = () => {
   const [currentPageNumber, setCurrentPageNumber] = useState<string>("");
   const [searchedName, setSearchedName] = useState<string | null>("");
 
-  const [dataResults, setDataResults] = useState<InitialApiResponse>();
+  const [dataResults, setDataResults] = useState<InitialApiResponse>({
+    info: { pages: 1 },
+    results: [],
+  });
   const [loading, setLoading] = useState<Boolean>(false);
   const [error, setError] = useState<string>("");
 
@@ -33,7 +36,6 @@ const CardList: FunctionComponent = () => {
     async () => await fetch(characterURL).then((res) => res.json()),
     queryOptions
   );
-  console.log(currentPageNumber);
 
   useEffect(() => {
     const storedPageNumber = sessionStorage.getItem("storedPageNumber");
@@ -44,15 +46,14 @@ const CardList: FunctionComponent = () => {
     if (!storedPageNumber) setCurrentPageNumber("1");
     if (storedCharacterSearch) setSearchedName(storedCharacterSearch);
 
-    if (data?.error) {
-      setLoading(false);
-      setError(data.error.error);
-      setTimeout(() => {
-        setError("");
-      }, 5000);
+    if (data) {
+      setDataResults(data);
+      if (error) setError("");
     }
-    if (data) setDataResults(data);
-  }, [data, dataResults, isLoading, currentPageNumber]);
+    if (dataResults?.info === undefined) {
+      return setError("No results...");
+    }
+  }, [data, dataResults, isLoading, currentPageNumber, error]);
 
   // Function to handle pageswitch and sessionstorage of the currently selected page.
   const selectPage = (selectPage: { selected: number }) => {
@@ -65,6 +66,18 @@ const CardList: FunctionComponent = () => {
 
   const searchHandler = (e: SyntheticEvent) => {
     e.preventDefault();
+  };
+
+  const userInputHandler = (input: string) => {
+    setCurrentPageNumber("1");
+    sessionStorage.setItem("storedPageNumber", "1");
+
+    setSearchedName(input);
+  };
+
+  const isPageUndefined = () => {
+    if (dataResults.info === undefined) return 1;
+    else return dataResults.info.pages;
   };
 
   return (
@@ -86,11 +99,7 @@ const CardList: FunctionComponent = () => {
               id="filled-basic"
               label="Search"
               variant="filled"
-              onChange={(e) => setSearchedName(e.target.value)}
-              onFocus={() => {
-                setCurrentPageNumber("1");
-                sessionStorage.setItem("storedPageNumber", "1");
-              }}
+              onChange={(e) => userInputHandler(e.target.value)}
             />
           </form>
         </Box>
@@ -100,26 +109,32 @@ const CardList: FunctionComponent = () => {
           <CircularProgress />
         </Box>
       )}
-      {error && <div style={{ color: "white" }}>{error}</div>}
+      {error && (
+        <div
+          style={{ color: "white", textAlign: "center", marginBottom: "1rem" }}
+        >
+          {error}
+        </div>
+      )}
       <div className={styles.cardList_container}>
         <CardItem data={dataResults?.results} />
       </div>
-      <div className={styles.pagination_container}>
-        {!error && (
+      {dataResults?.info !== undefined && (
+        <div className={styles.pagination_container}>
           <ReactPaginate
             containerClassName={styles.pagination_component}
             nextLabel={<AiOutlineArrowRight size={20} />}
             previousLabel={<AiOutlineArrowLeft size={20} />}
             forcePage={parseInt(currentPageNumber) - 1}
-            pageCount={dataResults?.info.pages || 1}
+            pageCount={isPageUndefined()}
             onPageChange={(select: { selected: number }) => selectPage(select)}
             pageRangeDisplayed={2}
             renderOnZeroPageCount={undefined}
             nextClassName={styles.pagination_next}
             previousClassName={styles.pagination_prev}
           />
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 };

@@ -11,7 +11,7 @@ const Home: NextPage = () => {
   // Set the selected page back to 1 in the character pagination
   useEffect(() => {
     const currentPage = sessionStorage.getItem("selectedPage");
-    if (currentPage) sessionStorage.setItem("selectedPage", "1");
+    if (currentPage !== "1") sessionStorage.setItem("selectedPage", "1");
   });
 
   return (
@@ -25,7 +25,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/rickmorty.jpg" />
       </Head>
 
-      <PageLayout>
+      <PageLayout isCentered={true}>
         <>
           <div className={styles.heading_container}>
             <h1 className={styles.heading}>
