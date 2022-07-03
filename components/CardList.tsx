@@ -51,9 +51,17 @@ const CardList: FunctionComponent = () => {
       if (error) setError("");
     }
     if (dataResults?.info === undefined) {
-      return setError("No results...");
+      return setError("Your search has no matches...");
     }
   }, [data, dataResults, isLoading, currentPageNumber, error]);
+
+  if (!data) {
+    return (
+      <Box sx={{ display: "flex", m: 2 }}>
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   // Function to handle pageswitch and sessionstorage of the currently selected page.
   const selectPage = (selectPage: { selected: number }) => {
@@ -104,18 +112,13 @@ const CardList: FunctionComponent = () => {
           </form>
         </Box>
       </Container>
-      {loading && (
-        <Box sx={{ display: "flex", m: 2 }}>
-          <CircularProgress />
-        </Box>
-      )}
+      {/* Error message */}
       {error && (
-        <div
-          style={{ color: "white", textAlign: "center", marginBottom: "1rem" }}
-        >
-          {error}
+        <div style={{ textAlign: "center" }}>
+          <p>{error}</p>
         </div>
       )}
+      {/* List container with items */}
       <div className={styles.cardList_container}>
         <CardItem data={dataResults?.results} />
       </div>

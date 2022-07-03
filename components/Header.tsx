@@ -44,11 +44,11 @@ const Header: FunctionComponent = () => {
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".2rem",
               color: "inherit",
               textDecoration: "none",
+              fontFamily: "Rubik Moonrocks",
             }}
           >
             RM Universe
@@ -91,6 +91,7 @@ const Header: FunctionComponent = () => {
                     href={`/${page}`}
                     textTransform="capitalize"
                     textAlign="center"
+                    color="#000"
                   >
                     {page}
                   </Typography>
