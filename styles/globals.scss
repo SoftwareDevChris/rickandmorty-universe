@@ -2,13 +2,9 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  color: #f0f0f0;
-}
 
-html,
-body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  color: #eeeeee;
+  font-family: "Roboto", sans-serif;
 }
 
 a {
@@ -27,10 +23,4 @@ a {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-.selected {
-  background-color: #0151c1;
-  border-radius: 100%;
-  padding: 0.3rem 0;
 }

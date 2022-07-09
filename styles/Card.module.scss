@@ -1,0 +1,49 @@
+@use "./variables" as *;
+
+.card {
+  background: $dark;
+  width: 100%;
+
+  img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  .card_content {
+    padding: 0 0.5rem;
+  }
+
+  .card_title {
+    font-size: 1.4rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.5rem 0;
+  }
+
+  .card_desc {
+    font-size: 0.9rem;
+  }
+
+  .button_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1.3rem 0;
+  }
+
+  .card_button {
+    background: $blue;
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: $md) {
+  .card {
+    width: 80%;
+  }
+}

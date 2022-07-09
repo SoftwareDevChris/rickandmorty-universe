@@ -3,7 +3,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 
-import styles from "../styles/Home.module.css";
+import styles from "../styles/Home.module.scss";
 
 import PageLayout from "../components/PageLayout";
 
@@ -28,10 +28,10 @@ const Home: NextPage = () => {
       <PageLayout isCentered={true}>
         <>
           <div className={styles.heading_container}>
-            <h1 className={styles.heading}>
+            <h2 className={styles.heading}>
               <span className={styles.heading_sub_one}>Rick & Morty</span>
               <span className={styles.heading_sub_two}>Universe</span>
-            </h1>
+            </h2>
           </div>
 
           <div className={styles.hero_image_container}>

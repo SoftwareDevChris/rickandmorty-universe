@@ -7,7 +7,7 @@ import React, {
 
 import ReactPaginate from "react-paginate";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { Box, CircularProgress, Container, TextField } from "@mui/material";
+import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 
 import queryOptions from "../utility/QueryOptions";
@@ -15,7 +15,7 @@ import { InitialApiResponse } from "../utility/DataModels";
 
 import CardItem from "../components/CardItem";
 
-import styles from "../styles/CardList.module.css";
+import styles from "../styles/CardList.module.scss";
 
 const CardList: FunctionComponent = () => {
   const [currentPageNumber, setCurrentPageNumber] = useState<string>("");
@@ -57,9 +57,9 @@ const CardList: FunctionComponent = () => {
 
   if (!data) {
     return (
-      <Box sx={{ display: "flex", m: 2 }}>
+      <div style={{ display: "flex", margin: "1rem" }}>
         <CircularProgress />
-      </Box>
+      </div>
     );
   }
 
@@ -90,28 +90,13 @@ const CardList: FunctionComponent = () => {
 
   return (
     <>
-      <Container
-        sx={{ display: "flex", justifyContent: "center", margin: "2rem 0" }}
-      >
-        <Box
-          sx={{
-            background: "#ffff",
-            borderRadius: 1,
-            width: { sm: "90%", md: "50%" },
-          }}
-        >
-          <form onSubmit={searchHandler}>
-            <TextField
-              fullWidth
-              size="medium"
-              id="filled-basic"
-              label="Search"
-              variant="filled"
-              onChange={(e) => userInputHandler(e.target.value)}
-            />
-          </form>
-        </Box>
-      </Container>
+      <div className={styles.search_container}>
+        <input
+          id={styles.search_input}
+          placeholder="Search"
+          onChange={(e) => userInputHandler(e.target.value)}
+        />
+      </div>
       {/* Error message */}
       {error && (
         <div style={{ textAlign: "center" }}>
@@ -135,6 +120,7 @@ const CardList: FunctionComponent = () => {
             renderOnZeroPageCount={undefined}
             nextClassName={styles.pagination_next}
             previousClassName={styles.pagination_prev}
+            activeClassName={styles.active_page}
           />
         </div>
       )}

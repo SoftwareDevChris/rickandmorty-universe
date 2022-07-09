@@ -1,0 +1,73 @@
+@use "./variables" as *;
+
+.search_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem 0;
+
+  #search_input {
+    height: 3rem;
+    width: 335px;
+    background: $white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    color: $dark;
+  }
+}
+
+.cardList_container {
+  width: 100%;
+  padding: 0 1rem;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: auto;
+  place-items: center;
+  gap: 1rem;
+}
+
+.pagination_container {
+  display: flex;
+  justify-content: center;
+
+  ul {
+    background: $dark;
+    margin: 1rem 0;
+    border-radius: 5px;
+    padding: 0.5rem 0;
+  }
+}
+
+.pagination_component {
+  display: flex;
+  align-items: center;
+  list-style-type: none;
+  padding: 2rem 0;
+  font-weight: 600;
+
+  li {
+    display: flex;
+    align-items: center;
+
+    a {
+      margin: 0.4rem;
+      padding: 0.2rem 0.4rem;
+      cursor: pointer;
+    }
+  }
+
+  .active_page {
+    background-color: $blue;
+    border-radius: 50%;
+  }
+
+  .pagination_next a,
+  .pagination_prev a {
+    display: flex;
+    align-items: center;
+  }
+}

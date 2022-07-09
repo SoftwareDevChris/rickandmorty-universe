@@ -1,51 +1,45 @@
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
-import CardActions from "@mui/material/CardActions";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
 import { DataModel } from "../utility/DataModels";
+
+import styles from "../styles/Card.module.scss";
 
 type CardProps = {
   data: [] | undefined;
 };
 
 const CardItem = ({ data }: CardProps) => {
+  const router = useRouter();
+
   return (
     <>
       {data?.map((char: DataModel) => {
         return (
-          <Card
-            key={char.id}
-            sx={{ width: "100%", background: "#1a1a1acf", color: "#ffff" }}
-          >
-            <CardMedia
-              component="img"
-              height={250}
-              width={250}
-              image={char.image}
+          <div className={styles.card} key={char.id}>
+            <Image
+              height={500}
+              width={500}
+              src={char.image}
               alt={`An image of ${char.name}`}
+              onClick={() => router.push(`characters/${char.id}`)}
+              style={{ cursor: "pointer" }}
             />
 
-            <CardContent>
-              <Typography
-                variant="h5"
-                component="div"
-                noWrap={true}
-                gutterBottom
-              >
-                {char.name}
-              </Typography>
-              <Typography variant="body2" color="#ffff">
-                {char.species}
-              </Typography>
-            </CardContent>
+            <figcaption className={styles.card_content}>
+              <h5 className={styles.card_title}>{char.name}</h5>
+              <p className={styles.card_desc}>{char.species}</p>
 
-            <CardActions>
-              <Button href={`characters/${char.id}`}>Read more</Button>
-            </CardActions>
-          </Card>
+              <div className={styles.button_container}>
+                <button
+                  className={styles.card_button}
+                  onClick={() => router.push(`characters/${char.id}`)}
+                >
+                  Read more
+                </button>
+              </div>
+            </figcaption>
+          </div>
         );
       })}
     </>

@@ -1,139 +1,70 @@
 import { FunctionComponent, useState } from "react";
+import { useRouter } from "next/router";
 
-import { RiSpaceShipFill } from "react-icons/ri";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
+import { RiSpaceShipFill } from "react-icons/ri";
 
-import {
-  AppBar,
-  Box,
-  Button,
-  Container,
-  IconButton,
-  Menu,
-  MenuItem,
-  Toolbar,
-  Tooltip,
-  Typography,
-} from "@mui/material";
-
-import AdbIcon from "@mui/icons-material/Adb";
+import styles from "../styles/Header.module.scss";
 
 const Header: FunctionComponent = () => {
-  const [navAnchor, setNavAnchor] = useState<null | HTMLElement>(null);
+  const [isOpen, setIsOpen] = useState<Boolean>(false);
 
-  const closeMenuHandler = (event: React.MouseEvent<HTMLElement>) => {
-    setNavAnchor(null);
-  };
+  const router = useRouter();
 
-  const openMenuHandler = (event: React.MouseEvent<HTMLElement>) => {
-    setNavAnchor(event?.currentTarget);
+  const handleMenuClick = () => {
+    setIsOpen(!isOpen);
   };
 
   const pages = ["characters", "about"];
 
   return (
-    <AppBar position="fixed" sx={{ background: "#141414f2" }}>
-      <Container>
-        <Toolbar>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontWeight: 700,
-              letterSpacing: ".2rem",
-              color: "inherit",
-              textDecoration: "none",
-              fontFamily: "Rubik Moonrocks",
-            }}
-          >
-            RM Universe
-          </Typography>
-
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
-              onClick={openMenuHandler}
-              color="inherit"
-            >
-              {navAnchor ? <AiOutlineClose /> : <AiOutlineMenu />}
-              {/* <MenuIcon /> */}
-            </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={navAnchor}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "left",
-              }}
-              open={Boolean(navAnchor)}
-              onClose={closeMenuHandler}
-              sx={{
-                display: { xs: "block", md: "none" },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={closeMenuHandler}>
-                  <Typography
-                    component="a"
-                    href={`/${page}`}
-                    textTransform="capitalize"
-                    textAlign="center"
-                    color="#000"
-                  >
-                    {page}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-          {/* <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} /> */}
-          <Typography
-            variant="h5"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".2rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            RM Universe
-          </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => {
+    <>
+      <header className={styles.header}>
+        <div className={styles.mobile_menu_container}>
+          {isOpen ? (
+            <AiOutlineClose
+              size={30}
+              className={styles.header_icons}
+              onClick={handleMenuClick}
+            />
+          ) : (
+            <AiOutlineMenu
+              size={30}
+              className={styles.header_icons}
+              onClick={handleMenuClick}
+            />
+          )}
+        </div>
+        {isOpen && (
+          <nav className={styles.mobile_nav}>
+            <ul>
+              {pages.map((el) => {
+                return (
+                  <li key={el}>
+                    <a href={`/${el}`}>{el}</a>
+                  </li>
+                );
+              })}
+            </ul>
+          </nav>
+        )}
+        <div className={styles.logo_container} onClick={() => router.push("/")}>
+          <RiSpaceShipFill size={30} />
+          <h1 className={styles.h1}>RM Universe</h1>
+        </div>
+        <nav className={styles.web_nav}>
+          <ul>
+            {pages.map((el) => {
               return (
-                <Button
-                  key={page}
-                  onClick={closeMenuHandler}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  <a href={`/${page}`}>{page}</a>
-                </Button>
+                <li key={el}>
+                  <a href={`/${el}`}>{el}</a>
+                </li>
               );
             })}
-          </Box>
-        </Toolbar>
-      </Container>
-    </AppBar>
+          </ul>
+        </nav>
+      </header>
+    </>
   );
 };
 
