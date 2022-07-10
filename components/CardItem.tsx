@@ -3,8 +3,6 @@ import { useRouter } from "next/router";
 
 import { DataModel } from "../utility/DataModels";
 
-import styles from "../styles/Card.module.scss";
-
 type CardProps = {
   data: [] | undefined;
 };
@@ -16,7 +14,7 @@ const CardItem = ({ data }: CardProps) => {
     <>
       {data?.map((char: DataModel) => {
         return (
-          <div className={styles.card} key={char.id}>
+          <div className="card" key={char.id}>
             <Image
               height={500}
               width={500}
@@ -26,13 +24,13 @@ const CardItem = ({ data }: CardProps) => {
               style={{ cursor: "pointer" }}
             />
 
-            <figcaption className={styles.card_content}>
-              <h5 className={styles.card_title}>{char.name}</h5>
-              <p className={styles.card_desc}>{char.species}</p>
+            <figcaption className="card_content">
+              <h5 className="card_title">{char.name}</h5>
+              <p className="card_desc">{char.species}</p>
 
-              <div className={styles.button_container}>
+              <div className="button_container">
                 <button
-                  className={styles.card_button}
+                  className="card_button"
                   onClick={() => router.push(`characters/${char.id}`)}
                 >
                   Read more

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
 import "../styles/globals.scss";
+import "../styles/Card.scss";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = useRef(new QueryClient());

@@ -12,9 +12,11 @@ const About: NextPage = () => {
         <link rel="icon" href="/rickmorty.jpg" />
       </Head>
 
-      <PageLayout>
+      <PageLayout isCentered={true}>
         <>
-          <h3>About</h3>
+          <div>
+            <h3 style={{ fontSize: "3rem" }}>Page will be added soon</h3>
+          </div>
         </>
       </PageLayout>
     </>

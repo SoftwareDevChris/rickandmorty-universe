@@ -1,3 +1,5 @@
+@use "./variables" as *;
+
 * {
   padding: 0;
   margin: 0;
@@ -18,9 +20,13 @@ a {
 
   min-height: 100vh;
   min-width: 100%;
-  padding: 4.3rem 1rem;
+  padding: $header-height 1rem 0 1rem;
   background: url("../public/sky.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.flex_container {
+  display: flex;
 }
