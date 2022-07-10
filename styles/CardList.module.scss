@@ -4,12 +4,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 1rem;
-  padding: 1rem 0;
+  padding: 2rem 0;
 
   #search_input {
     height: 3rem;
-    width: 335px;
+    width: 350px;
     background: $white;
     border: none;
     border-radius: 5px;
@@ -21,7 +20,7 @@
 
 .cardList_container {
   width: 100%;
-  padding: 0 1rem;
+  padding: 0 2rem;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -54,7 +53,7 @@
     align-items: center;
 
     a {
-      margin: 0.4rem;
+      margin: 0.2rem;
       padding: 0.2rem 0.4rem;
       cursor: pointer;
     }
@@ -69,5 +68,17 @@
   .pagination_prev a {
     display: flex;
     align-items: center;
+  }
+}
+
+@media only screen and (max-width: $md) {
+  .cardList_container {
+    padding: 0;
+  }
+
+  .search_container {
+    #search_input {
+      width: 100%;
+    }
   }
 }

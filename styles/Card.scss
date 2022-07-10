@@ -3,6 +3,7 @@
 .card {
   background: $dark;
   width: 100%;
+  border-radius: 5px;
 
   img {
     border-top-left-radius: 5px;
@@ -60,7 +61,7 @@
 }
 
 @media only screen and (max-width: $md) {
-  .card {
-    width: 80%;
-  }
+  // .card {
+  //   width: 80%;
+  // }
 }

@@ -10,8 +10,8 @@ import PageLayout from "../components/PageLayout";
 const Home: NextPage = () => {
   // Set the selected page back to 1 in the character pagination
   useEffect(() => {
-    const currentPage = sessionStorage.getItem("selectedPage");
-    if (currentPage !== "1") sessionStorage.setItem("selectedPage", "1");
+    const storedPage = sessionStorage.getItem("storedPageNumber");
+    if (storedPage !== "1") sessionStorage.setItem("storedPageNumber", "1");
   });
 
   return (

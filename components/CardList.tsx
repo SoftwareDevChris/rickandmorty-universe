@@ -116,7 +116,8 @@ const CardList: FunctionComponent = () => {
             forcePage={parseInt(currentPageNumber) - 1}
             pageCount={isPageUndefined()}
             onPageChange={(select: { selected: number }) => selectPage(select)}
-            pageRangeDisplayed={2}
+            pageRangeDisplayed={1}
+            marginPagesDisplayed={1}
             renderOnZeroPageCount={undefined}
             nextClassName={styles.pagination_next}
             previousClassName={styles.pagination_prev}
