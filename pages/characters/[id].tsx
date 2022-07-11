@@ -4,9 +4,6 @@ import Image from "next/image";
 
 import { useEffect, useState } from "react";
 
-// import styles from "../../styles/Details.module.css";
-import styles from "../../styles/Details.module.scss";
-
 import PageLayout from "../../components/PageLayout";
 
 // Base API URL
@@ -120,6 +117,7 @@ const Details = (char: Character) => {
         <link rel="icon" href="/rickmorty.jpg" />
       </Head>
 
+      {/* @ts-ignore - Currently incompatible with React 18 */}
       <PageLayout isCentered={true}>
         <div>
           <figure

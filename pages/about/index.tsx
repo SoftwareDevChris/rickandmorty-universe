@@ -20,6 +20,7 @@ const About: NextPage = () => {
         <link rel="icon" href="/rickmorty.jpg" />
       </Head>
 
+      {/* @ts-ignore - Currently incompatible with React 18 */}
       <PageLayout isCentered={true}>
         <>
           <div style={{ textAlign: "center" }}>
