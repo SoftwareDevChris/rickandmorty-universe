@@ -11,10 +11,7 @@ class MyDocument extends Document {
             href="https://fonts.gstatic.com"
             crossOrigin="true"
           />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap"
-            rel="stylesheet"
-          />
+          {/* Imported fonts go below here */}
         </Head>
         <body>
           <Main />

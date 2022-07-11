@@ -25,14 +25,13 @@ const Home: NextPage = () => {
         <link rel="icon" href="/rickmorty.jpg" />
       </Head>
 
+      {/* @ts-ignore - Currently incompatible with React 18 */}
       <PageLayout isCentered={true}>
         <>
-          <div className={styles.heading_container}>
-            <h2 className={styles.heading}>
-              <span className={styles.heading_sub_one}>Rick & Morty</span>
-              <span className={styles.heading_sub_two}>Universe</span>
-            </h2>
-          </div>
+          <h2 className={styles.heading}>
+            <span className={styles.heading_sub_one}>Rick & Morty</span>
+            <span className={styles.heading_sub_two}>Universe</span>
+          </h2>
 
           <div className={styles.hero_image_container}>
             <Image

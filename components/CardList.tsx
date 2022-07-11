@@ -7,7 +7,6 @@ import React, {
 
 import ReactPaginate from "react-paginate";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
-import { CircularProgress } from "@mui/material";
 import { useQuery } from "react-query";
 
 import queryOptions from "../utility/QueryOptions";
@@ -56,11 +55,7 @@ const CardList: FunctionComponent = () => {
   }, [data, dataResults, isLoading, currentPageNumber, error]);
 
   if (!data) {
-    return (
-      <div style={{ display: "flex", margin: "1rem" }}>
-        <CircularProgress />
-      </div>
-    );
+    return <div style={{ display: "flex", margin: "1rem" }}>Loading...</div>;
   }
 
   // Function to handle pageswitch and sessionstorage of the currently selected page.

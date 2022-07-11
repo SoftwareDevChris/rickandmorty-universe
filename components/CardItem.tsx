@@ -14,7 +14,7 @@ const CardItem = ({ data }: CardProps) => {
     <>
       {data?.map((char: DataModel) => {
         return (
-          <div className="card" key={char.id}>
+          <figure className="card" key={char.id}>
             <Image
               height={500}
               width={500}
@@ -37,7 +37,7 @@ const CardItem = ({ data }: CardProps) => {
                 </button>
               </div>
             </figcaption>
-          </div>
+          </figure>
         );
       })}
     </>
