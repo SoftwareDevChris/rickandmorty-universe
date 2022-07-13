@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   padding: 2rem 0;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
   #search_input {
     height: 2.5rem;
@@ -75,7 +76,7 @@
   .search_container {
     padding: 2rem 2rem;
     #search_input {
-      width: 100%;
+      max-width: 15rem;
     }
   }
 }
