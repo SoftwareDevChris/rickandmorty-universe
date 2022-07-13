@@ -5,14 +5,17 @@
   height: $header-height;
   padding: 0 1rem;
   position: fixed;
-  background: $dark;
+  background: $dark-alpha;
   display: flex;
   align-items: center;
   z-index: 95;
+  border-bottom: 1px solid $white;
 }
 
 .h1 {
-  font-size: 1.5rem;
+  font-family: $poppins;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
 }
 
 .header_icons {
@@ -50,13 +53,14 @@
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
     li {
-      color: #000;
-      font-size: 1.3rem;
-      text-transform: capitalize;
+      color: $dark;
+      font-size: 1rem;
+      font-family: $lato;
+      font-weight: 200;
       padding: 0.5rem 0;
 
       a {
-        padding: 0.5rem 0;
+        padding: 0.2rem;
       }
     }
   }
@@ -70,9 +74,9 @@
     list-style-type: none;
 
     li {
-      text-transform: uppercase;
       margin-left: 1rem;
-      font-size: 0.95rem;
+      font-size: 1rem;
+      font-family: $poppins;
     }
 
     a:hover {

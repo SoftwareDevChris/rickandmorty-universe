@@ -101,7 +101,7 @@ const Details = (char: Character) => {
 
   const setDynamicTextColor = (status?: string) => {
     if (status === "Dead") return "#d70101";
-    if (status === "Alive") return "#008000";
+    if (status === "Alive") return "#21c056";
     if (status === "unknown") return "#ffff00";
     return "#e6e6e6";
   };
@@ -119,7 +119,7 @@ const Details = (char: Character) => {
 
       {/* @ts-ignore - Currently incompatible with React 18 */}
       <PageLayout isCentered={true}>
-        <div>
+        <div className="figure_container">
           <figure
             className="card"
             key={char.characters.name}

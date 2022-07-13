@@ -49,7 +49,7 @@ const Header: FunctionComponent = () => {
           </nav>
         )}
         <div className={styles.logo_container} onClick={() => router.push("/")}>
-          <RiSpaceShipFill size={30} />
+          <RiSpaceShipFill fill="#21c056" size={30} />
           <h1 className={styles.h1}>RM Universe</h1>
         </div>
         <nav className={styles.web_nav}>

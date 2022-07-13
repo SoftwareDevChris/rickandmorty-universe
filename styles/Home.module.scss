@@ -1,3 +1,5 @@
+@use "../styles/variables" as *;
+
 .heading {
   display: flex;
   flex-direction: column;
@@ -10,12 +12,13 @@
 }
 
 .heading_sub_one {
+  font-family: $poppins;
   font-size: 3rem;
-  color: transparent;
 }
 
 .heading_sub_two {
-  font-size: 4.34rem;
+  font-family: $poppins;
+  font-size: 4.53rem;
   color: transparent;
 }
 
