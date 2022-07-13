@@ -8,7 +8,8 @@
 
   #search_input {
     height: 3rem;
-    width: 350px;
+    min-width: 250px;
+    max-width: 325px;
     background: $white;
     border: none;
     border-radius: 5px;
@@ -72,14 +73,10 @@
 }
 
 @media only screen and (max-width: $md) {
-  .cardList_container {
-    padding: 0 4rem;
-  }
-
-  .search_container {
-    padding: 2rem 4rem;
-    #search_input {
-      width: 100%;
-    }
-  }
+  // .search_container {
+  //   padding: 2rem 3rem;
+  //   #search_input {
+  //     width: 100%;
+  //   }
+  // }
 }
