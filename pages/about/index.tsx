@@ -23,9 +23,10 @@ const About: NextPage = () => {
       {/* @ts-ignore - Currently incompatible with React 18 */}
       <PageLayout isCentered={true}>
         <>
-          <div style={{ textAlign: "center" }}>
-            <h3 style={{ fontSize: "3rem" }}>Page will be added soon</h3>
-          </div>
+          <h3 style={{ fontSize: "3rem" }}>Made in NextJS</h3>
+          <p style={{ textAlign: "center", fontSize: "1.2rem" }}>
+            By SoftwareDevChris
+          </p>
         </>
       </PageLayout>
     </>

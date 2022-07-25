@@ -67,10 +67,6 @@ const CardList: FunctionComponent = () => {
     setCurrentPageNumber((selectPage.selected + 1).toString());
   };
 
-  const searchHandler = (e: SyntheticEvent) => {
-    e.preventDefault();
-  };
-
   const userInputHandler = (input: string) => {
     setCurrentPageNumber("1");
     sessionStorage.setItem("storedPageNumber", "1");
@@ -88,7 +84,7 @@ const CardList: FunctionComponent = () => {
       <div className={styles.search_container}>
         <input
           id={styles.search_input}
-          placeholder="Search"
+          placeholder="Search name"
           onChange={(e) => userInputHandler(e.target.value)}
         />
       </div>

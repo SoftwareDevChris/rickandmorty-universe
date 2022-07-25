@@ -40,6 +40,8 @@ const Home: NextPage = () => {
               width={350}
               height={350}
               src={"/hero.png"}
+              placeholder="blur"
+              blurDataURL="/public/hero.png"
             />
           </div>
         </>
