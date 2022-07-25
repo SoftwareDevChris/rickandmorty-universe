@@ -22,6 +22,8 @@ const CardItem = ({ data }: CardProps) => {
               alt={`An image of ${char.name}`}
               onClick={() => router.push(`characters/${char.id}`)}
               style={{ cursor: "pointer" }}
+              placeholder="blur"
+              blurDataURL="/public/profile-placeholder.png"
             />
 
             <figcaption className="card_content">

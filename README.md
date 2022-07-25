@@ -1,8 +1,7 @@
-Made in NextJS with: 
+# Made in NextJS with:
 
-Rick and Morty api
-
-Typescript
-React-Query
-MUI
-React-Pagination
+Rick and Morty API </br>
+Typescript </br>
+React-Query </br>
+React-Pagination </br>
+SCSS
