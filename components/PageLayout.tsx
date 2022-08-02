@@ -1,13 +1,12 @@
-import Image from "next/image";
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import Header from "../components/Header";
 
 type PageProps = {
-  children?: JSX.Element | ReactNode;
+  children?: JSX.Element | JSX.Element[];
   isCentered?: Boolean;
 };
 
-const PageLayout: FC = ({ children, isCentered }: PageProps) => (
+const PageLayout: FC<PageProps> = ({ children, isCentered }: PageProps) => (
   <>
     <Header />
     <div

@@ -1,6 +1,8 @@
 import { FunctionComponent, useState } from "react";
 import { useRouter } from "next/router";
 
+import { motion } from "framer-motion";
+
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { RiSpaceShipFill } from "react-icons/ri";
 
@@ -20,39 +22,42 @@ const Header: FunctionComponent = () => {
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.mobile_menu_container}>
+        <div className={styles.mobileMenuIcons}>
           {isOpen ? (
             <AiOutlineClose
               size={30}
-              className={styles.header_icons}
+              className={styles.headerIcon}
               onClick={handleMenuClick}
             />
           ) : (
             <AiOutlineMenu
               size={30}
-              className={styles.header_icons}
+              className={styles.headerIcon}
               onClick={handleMenuClick}
             />
           )}
         </div>
         {isOpen && (
-          <nav className={styles.mobile_nav}>
-            <ul>
+          <nav className={styles.mobileNav}>
+            <motion.ul
+              initial={{ opacity: 0, x: -200 }}
+              animate={{ opacity: 1, x: 0 }}
+            >
               {pages.map((el) => {
                 return (
-                  <li key={el}>
+                  <motion.li key={el} whileHover={{ scale: 1.1 }}>
                     <a href={`/${el}`}>{el}</a>
-                  </li>
+                  </motion.li>
                 );
               })}
-            </ul>
+            </motion.ul>
           </nav>
         )}
-        <div className={styles.logo_container} onClick={() => router.push("/")}>
+        <div className={styles.logoContainer} onClick={() => router.push("/")}>
           <RiSpaceShipFill fill="#21c056" size={30} />
           <h1 className={styles.h1}>RM Universe</h1>
         </div>
-        <nav className={styles.web_nav}>
+        <nav className={styles.webNav}>
           <ul>
             {pages.map((el) => {
               return (

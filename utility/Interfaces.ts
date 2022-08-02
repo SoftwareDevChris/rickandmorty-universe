@@ -1,4 +1,4 @@
-interface InitialApiResponse {
+interface InitialResponseFromAPI {
   info: {
     count?: number;
     next?: string | null;
@@ -11,7 +11,7 @@ interface InitialApiResponse {
   };
 }
 
-interface DataModel {
+interface ResultsFromAPI {
   id: number;
   name: string;
   species: string;
@@ -19,4 +19,4 @@ interface DataModel {
   image: string;
 }
 
-export type { DataModel, InitialApiResponse };
+export type { ResultsFromAPI, InitialResponseFromAPI };

@@ -1,0 +1,12 @@
+@use "./variables" as *;
+
+.madeIn {
+  font-size: 3rem;
+  text-align: center;
+}
+
+.madeBy {
+  font-size: 1.2rem;
+  text-align: center;
+  color: $green;
+}

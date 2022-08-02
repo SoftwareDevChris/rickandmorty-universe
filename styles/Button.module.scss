@@ -1,0 +1,12 @@
+@use "./variables" as *;
+
+.button {
+  background: $green;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-family: $lato;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}

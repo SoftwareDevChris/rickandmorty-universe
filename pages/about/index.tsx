@@ -1,7 +1,9 @@
+import { useEffect } from "react";
 import { NextPage } from "next";
 import Head from "next/head";
 
-import { useEffect } from "react";
+import { motion } from "framer-motion";
+import styles from "../../styles/About.module.scss";
 
 import PageLayout from "../../components/PageLayout";
 
@@ -11,6 +13,11 @@ const About: NextPage = () => {
     const storedPage = sessionStorage.getItem("storedPageNumber");
     if (storedPage !== "1") sessionStorage.setItem("storedPageNumber", "1");
   });
+
+  const animateContainer = {
+    show: { opacity: 1, y: 0 },
+    hidden: { opacity: 0, y: -200 },
+  };
 
   return (
     <>
@@ -22,12 +29,10 @@ const About: NextPage = () => {
 
       {/* @ts-ignore - Currently incompatible with React 18 */}
       <PageLayout isCentered={true}>
-        <>
-          <h3 style={{ fontSize: "3rem" }}>Made in NextJS</h3>
-          <p style={{ textAlign: "center", fontSize: "1.2rem" }}>
-            By SoftwareDevChris
-          </p>
-        </>
+        <motion.div initial="hidden" animate="show" variants={animateContainer}>
+          <h3 className={styles.madeIn}>Made in NextJS</h3>
+          <p className={styles.madeBy}>By SoftwareDevChris</p>
+        </motion.div>
       </PageLayout>
     </>
   );

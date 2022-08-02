@@ -1,31 +1,27 @@
-import React, {
-  FunctionComponent,
-  useState,
-  useEffect,
-  SyntheticEvent,
-} from "react";
+import React, { FC, useState, useEffect } from "react";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 import ReactPaginate from "react-paginate";
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 import { useQuery } from "react-query";
 
 import queryOptions from "../utility/QueryOptions";
-import { InitialApiResponse } from "../utility/DataModels";
+import { InitialResponseFromAPI } from "../utility/Interfaces";
 
 import CardItem from "../components/CardItem";
 
 import styles from "../styles/CardList.module.scss";
 
-const CardList: FunctionComponent = () => {
+const CardList: FC = () => {
   const [currentPageNumber, setCurrentPageNumber] = useState<string>("");
   const [searchedName, setSearchedName] = useState<string | null>("");
+  const [error, setError] = useState<string>("");
 
-  const [dataResults, setDataResults] = useState<InitialApiResponse>({
+  const [dataResults, setDataResults] = useState<InitialResponseFromAPI>({
     info: { pages: 1 },
     results: [],
   });
-  const [loading, setLoading] = useState<Boolean>(false);
-  const [error, setError] = useState<string>("");
 
   const characterURL: string = `https://rickandmortyapi.com/api/character?page=${currentPageNumber}&name=${searchedName}`;
 
@@ -54,7 +50,7 @@ const CardList: FunctionComponent = () => {
     }
   }, [data, dataResults, isLoading, currentPageNumber, error]);
 
-  if (!data) {
+  if (isLoading || isFetching) {
     return <div style={{ display: "flex", margin: "1rem" }}>Loading...</div>;
   }
 
@@ -79,6 +75,18 @@ const CardList: FunctionComponent = () => {
     else return dataResults.info.pages;
   };
 
+  const animateParent = {
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        staggerChildren: 0.5,
+        when: "beforeChildren",
+      },
+    },
+    hidden: { opacity: 0, x: -200 },
+  };
+
   return (
     <>
       <div className={styles.search_container}>
@@ -94,10 +102,21 @@ const CardList: FunctionComponent = () => {
           <p>{error}</p>
         </div>
       )}
-      {/* List container with items */}
-      <div className={styles.cardList_container}>
-        <CardItem data={dataResults?.results} />
-      </div>
+      {/* Container with figure items */}
+      <AnimatePresence>
+        <motion.div
+          className={styles.cardList_container}
+          initial="hidden"
+          animate="show"
+          variants={animateParent}
+        >
+          {data &&
+            dataResults.results.map((card, i) => {
+              return <CardItem key={i} data={card} />;
+            })}
+        </motion.div>
+      </AnimatePresence>
+      {/* Pagination */}
       {dataResults?.info !== undefined && (
         <div className={styles.pagination_container}>
           <ReactPaginate

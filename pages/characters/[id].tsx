@@ -1,8 +1,9 @@
+import { FC, useEffect, useState } from "react";
+
 import Head from "next/head";
-import { useRouter } from "next/router";
 import Image from "next/image";
 
-import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 
 import PageLayout from "../../components/PageLayout";
 
@@ -58,7 +59,7 @@ export async function getStaticProps(context: any) {
   };
 }
 
-type Character = {
+type CharacterInfo = {
   characters: {
     gender: string;
     image: string;
@@ -86,18 +87,15 @@ type LocationInfo = {
 };
 
 // Component for rendering a single item with all its details
-const Details = (char: Character) => {
-  const [locationInfo, setLocationInfo] = useState<LocationInfo>();
-  const router = useRouter();
+const Details: FC<CharacterInfo> = (char: CharacterInfo) => {
+  const fetchLocationInfo = fetch(char.characters.location.url);
+  const status = useQuery({
+    queryKey: [`characters/${char.characters.name}`, 1],
+    queryFn: async () => await fetchLocationInfo.then((res) => res.json()),
+  });
 
-  useEffect(() => {
-    const getLocationData = async () => {
-      const getData = await fetch(char.characters.location.url);
-      const res = await getData.json();
-      setLocationInfo(res);
-    };
-    getLocationData();
-  }, [char.characters.location.url]);
+  // const [locationInfo, setLocationInfo] = useState<LocationInfo>(status.data);
+  const locations: LocationInfo = status.data;
 
   const setDynamicTextColor = (status?: string) => {
     if (status === "Dead") return "#d70101";
@@ -117,7 +115,6 @@ const Details = (char: Character) => {
         <link rel="icon" href="/rickmorty.jpg" />
       </Head>
 
-      {/* @ts-ignore - Currently incompatible with React 18 */}
       <PageLayout isCentered={true}>
         <div className="figure_container">
           <figure
@@ -165,26 +162,21 @@ const Details = (char: Character) => {
 
               <div className="card_section_container">
                 <p className={""} color={`${setDynamicTextColor()}`}>
-                  {locationInfo?.name}
+                  {locations?.name}
                 </p>
 
                 <p className={""} color={`${setDynamicTextColor()}`}>
-                  {locationInfo?.dimension || "Unknown"}
+                  {locations?.dimension || "Unknown"}
                 </p>
 
                 <p className={""} color={`${setDynamicTextColor()}`}>
-                  {locationInfo?.type || "Unknown"}
+                  {locations?.type || "Unknown"}
                 </p>
 
                 <p className={""} color={`${setDynamicTextColor()}`}>
-                  {locationInfo?.residents.length || "Unknown"}
+                  {locations?.residents.length || "Unknown"}
                 </p>
               </div>
-            </div>
-            <div className="button_container">
-              <button className="card_button" onClick={() => router.back()}>
-                Go back
-              </button>
             </div>
           </figure>
         </div>
